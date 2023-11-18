@@ -45,7 +45,6 @@ public class Gestor extends AppCompatActivity {
                 }
             }
         });
-
         if(cita.isEmpty()){
             Cita cita1 = null;
             cita1.setHora("");
@@ -58,8 +57,6 @@ public class Gestor extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listaAdapter);
-
-
     }
 
 
