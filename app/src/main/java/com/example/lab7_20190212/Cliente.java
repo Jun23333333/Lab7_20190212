@@ -33,6 +33,24 @@ public class Cliente extends AppCompatActivity {
         });
 
         db = FirebaseFirestore.getInstance();
+        db.collection("cita").addSnapshotListener((collection, error) -> {
+            if (error != null) {
+                Log.d("lectura", "Error listening for document changes.");
+                return;
+            }
+            if (collection != null && !collection.isEmpty()) {
+                for (QueryDocumentSnapshot document : collection) {
+                    Cita cit = document.toObject(Cita.class);
+                    cita.add(cit);
+                }
+            }
+        });
 
+
+        Adaptador listaAdapter = new Adaptador(cita,this);
+        RecyclerView recyclerView = findViewById(R.id.lista);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(listaAdapter);
     }
 }

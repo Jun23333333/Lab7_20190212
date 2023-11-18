@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Gestor extends AppCompatActivity {
     FirebaseFirestore db;
-    List<Cita> cita = new ArrayList<>();
+    List<Cita> cita2 = new ArrayList<>();
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,18 @@ public class Gestor extends AppCompatActivity {
             if (collection != null && !collection.isEmpty()) {
                 for (QueryDocumentSnapshot document : collection) {
                     Cita cit = document.toObject(Cita.class);
-                    cita.add(cit);
+                    cita2.add(cit);
                 }
             }
         });
-        if(cita.isEmpty()){
+        if(cita2.isEmpty()){
             Cita cita1 = null;
             cita1.setHora("");
             cita1.setCorreo("");
             cita1.setNombre("No hay cita registrada");
-            cita.add(cita1);
+            cita2.add(cita1);
         }
-        Adaptador listaAdapter = new Adaptador(cita,this);
+        Adaptador listaAdapter = new Adaptador(cita2,this);
         RecyclerView recyclerView = findViewById(R.id.lista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
